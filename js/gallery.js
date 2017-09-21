@@ -1,12 +1,17 @@
 (function () {
     'use strict';
-    
+    //get all the currently visible figures & figcaptions
+    var visiblefigures = $('figure:visible'),
+    figcaptions = $('figcaption');
+   
     //hide all the figcaptions when the page loads
-    var figcaptions = $('figcaption');
     $.each(figcaptions, function () {
         $(this).hide();
     });
+    //hide all the close/previous/next buttons
     $('.close').hide();
+    $('.prev').hide();
+    $('.next').hide();
     //function for finding the text in the figures
     function searchString(cap) {
         //Hide all the figures
@@ -37,6 +42,10 @@
     $("input").keyup(function () {
         var inputText = $('input').val();
         searchString(inputText);
+        //change the array of visible figures to return only the filtered results
+        visiblefigures = $('figure:visible');
+        return visiblefigures
+         
     });
     
     //lightbox show/hide
@@ -54,8 +63,13 @@
             $('figure').show();
             $('figcaption').hide();
         }
-       
+    
+       if (visiblefigures.length === 1) {
+            $('.prev').hide();
+            $('.next').hide();
+       }
     });
+    
     $('.close').on('click', function () {
         $(this).parent().removeClass('lightbox');
         $('figure').show();
@@ -64,4 +78,5 @@
         var inputText = $('input').val();
         searchString(inputText);
     });
+    
 }());

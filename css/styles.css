@@ -38,10 +38,24 @@ img {
 
 figcaption {
     color: white;
+    text-align: center;
+    padding: 10px;
 }
 
 .close {
-    float: right;
+    width:100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.prev, .next {
     color: white;
-    margin-right: 5px;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;
 }
