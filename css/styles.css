@@ -12,6 +12,13 @@ header {
     margin-top: 30px;
 }
 
+input[type=text] {
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid lightgrey;
+}
+
 img {
     max-width:100%
 }

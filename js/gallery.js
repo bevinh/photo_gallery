@@ -1,6 +1,12 @@
 (function () {
     'use strict';
     
+    //hide all the figcaptions when the page loads
+    var figcaptions = $('figcaption');
+    $.each(figcaptions, function () {
+        $(this).hide();
+    });
+    
     //function for finding the text in the figures
     function searchString(cap) {
         //Hide all the figures
