@@ -1,7 +1,7 @@
 (function () {
     'use strict';
-    
-    var images = [
+    var slides = [],
+        images = [
         {
             "url": "/images/01.jpg", 
             "alttext": "Hay Bales",
@@ -89,6 +89,7 @@
     
     //function for finding the text in the figures
     function searchString(cap) {
+        
         //Hide all the figures
         $('figure').hide();
 
@@ -102,6 +103,7 @@
         //Iterate through the items and show any that match the cap
         $(items).each(function (index) {
             $(this).parent().show();
+            slides.push($(this).parent().attr('id'))
         });
 
         //Iterate through the images and find all images with the attr specified
@@ -109,13 +111,16 @@
             var alttext = $(this).attr("alt").toLowerCase();
             if (alttext === cap) {
                 $(this).parent().show();
+                slides.push($(this).parent().attr('id')
             }
         });
+        
     }
      //check the input field for input, and search the alt and images to see if it's there
     $("input").keyup(function () {
         var inputText = $('input').val();
         searchString(inputText);
+        console.log(slides)
     });
     
      //open the lightbox       
@@ -137,7 +142,7 @@
                     images[index].figcaptiontext +
                     '</p></div></div>'
             );
-        
+        //close action to remove the lightbox once it is opened
         $('.close').on("click", function(){
          $("#lightbox").remove();
         });
