@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    "use strict";
     var slides = [],
         newImages = [],
         unique = [],
@@ -83,7 +83,7 @@
 
     function populatePage() {
         //iterate over the json object
-        for (var key in images) {
+        for (var key=0; key < images.length; key++) {
             //write the html
             $('#photos').append(
                 "<figure id='" +
@@ -94,8 +94,8 @@
                images[key].alttext + 
                 "'/><figcaption>" +
                 images[key].figcaptiontext + 
-                "</figcaption></figure>")
-        };
+                "</figcaption></figure>");
+        }
     }
     populatePage(images);
     //keep the figcaptions but hide them so that they don't add extra space in the display
@@ -106,7 +106,7 @@
         slides = $.unique(slides);
         
         function findImages(item, index){
-             for(var i in images) { 
+             for(var i=0; i < images.length ;i++) { 
                   var image = images[i];
                   if (image.id === item){
                    newImages.push({
@@ -120,7 +120,7 @@
            
                    
             }
-                slides.forEach(findImages) 
+                slides.forEach(findImages);
                 unique = newImages.filter(function(itm, i, a) {
                 return i == a.indexOf(itm);
                 });
@@ -148,7 +148,7 @@
              if($.inArray($(this).parent().attr('id'), slides) !== -1) {
                    //do nothing
                 } else {
-                    slides.push($(this).parent().attr('id'))
+                    slides.push($(this).parent().attr('id'));
                 }
             
         });
@@ -161,7 +161,7 @@
                 if($.inArray($(this).parent().attr('id'), slides) !== -1) {
                     //do nothing
                 } else {
-                    slides.push($(this).parent().attr('id'))
+                    slides.push($(this).parent().attr('id'));
                 }
             }
         });
@@ -179,7 +179,7 @@
      //open the lightbox       
     function openLightbox(index){
         //make sure the array isn't full of duplicates
-        filterImages()
+        filterImages();
         var lightboxImages = [];
         
         //make sure lightboxImages has the correct image array according to what is displayed on the screen
@@ -192,7 +192,9 @@
         }
         
          //find the image that matches the index
-       var image = lightboxImages.find(image => image.id === index);
+        var image = lightboxImages.find(function(image) {
+           return image.id === index; 
+        });
         //append the lightbox, with the appropriate images
          $('#photos').append(
                     '<div id="lightbox" class="lightbox">' +
@@ -224,9 +226,9 @@
         $('.next').on("click", function(){
             slideno = slideno + 1;
             //set the new image's source, alttext, and caption
-            $('#lightboximage').attr("src", lightboxImages[slideno].url)
-            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext)
-            $('#caption').text(lightboxImages[slideno].figcaptiontext)
+            $('#lightboximage').attr("src", lightboxImages[slideno].url);
+            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext);
+            $('#caption').text(lightboxImages[slideno].figcaptiontext);
             
             //hide or show the appropriate lightbox buttons
             if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
@@ -238,15 +240,15 @@
              if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
                 $('.next').hide();
             }
-        })
+        });
         
         //previous button for the slider
         $('.prev').on("click", function(){
             slideno = slideno - 1;
             //set the new image's source, alttext, and caption
-            $('#lightboximage').attr("src", lightboxImages[slideno].url)
-            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext)
-            $('#caption').text(lightboxImages[slideno].figcaptiontext)
+            $('#lightboximage').attr("src", lightboxImages[slideno].url);
+            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext);
+            $('#caption').text(lightboxImages[slideno].figcaptiontext);
             
             //hide or show the appopriate lightbox buttons
             if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
@@ -262,7 +264,7 @@
              if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
             $('.next').hide();
             }
-        })
+        });
         
         //close action to remove the lightbox once it is opened
         $('.close').on("click", function(){
@@ -272,8 +274,8 @@
     
     //click action to open the lightbox
     $('figure').on("click", function(){
-        var index = $(this).attr('id')
+        var index = $(this).attr('id');
         openLightbox(index);
-    })
+    });
     
 }());
