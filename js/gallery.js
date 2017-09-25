@@ -6,73 +6,73 @@
         images = [
             {
                 "id" : "01",
-                "url" : "/images/01.jpg",
+                "url" : "./images/01.jpg",
                 "alttext": "Hay Bales",
                 "figcaptiontext": "I love hay bales. Took this snap on a drive through the countryside past some straw fields"
             },
             {
                 "id" : "02",
-                "url": "/images/02.jpg",
+                "url": "./images/02.jpg",
                 "alttext": "Lake",
                 "figcaptiontext": "The lake was so calm today. We had a great view of the snow on the mountains from here."
             },
             {
                 "id" : "03",
-                "url": "/images/03.jpg",
+                "url": "./images/03.jpg",
                 "alttext": "Canyon",
                 "figcaptiontext": "I hided to the top of the mountain and got this picture of the canyon and trees below."
             },
             {
                 "id" : "04",
-                "url": "/images/04.jpg",
+                "url": "./images/04.jpg",
                 "alttext": "Iceberg",
                 "figcaptiontext": "It was amazing to see an iceberg up close, it was so cold but didn't snow today."
             },
             {
                 "id" : "05",
-                "url": "/images/05.jpg",
+                "url": "./images/05.jpg",
                 "alttext": "Desert",
                 "figcaptiontext": "The red cliffs were beautiful. It was really hot in the desert but we did a lot of walking through the canyons."
             },
             {
                 "id" : "06",
-                "url": "/images/06.jpg",
+                "url": "./images/06.jpg",
                 "alttext": "Fall",
                 "figcaptiontext": "Fall is coming, I love when the leaves on the trees start to change color."
             },
             {
                 "id" : "07",
-                "url": "/images/07.jpg",
+                "url": "./images/07.jpg",
                 "alttext": "Plantation",
                 "figcaptiontext": "I drove past this plantation yesterday, everything is so green!"
             },
             {
                 "id" : "08",
-                "url": "/images/08.jpg",
+                "url": "./images/08.jpg",
                 "alttext": "Dunes",
                 "figcaptiontext": "My summer vacation to the Oregon Coast. I love the sandy dunes!"
             },
             {
                 "id" : "09",
-                "url": "/images/09.jpg",
+                "url": "./images/09.jpg",
                 "alttext": "Countryside Lane",
                 "figcaptiontext": "We enjoyed a quiet stroll down this countryside lane."
             },
             {
                 "id" : "10",
-                "url" : "/images/10.jpg",
+                "url" : "./images/10.jpg",
                 "alttext": "Sunset",
                 "figcaptiontext": "Sunset at the coast! The sky turned a lovely shade of orange."
             },
             {
                 "id" : "11",
-                "url" : "/images/11.jpg",
+                "url" : "./images/11.jpg",
                 "alttext": "Cave",
                 "figcaptiontext": "I did a tour of a cave today and the view of hte landscape below was breathtaking."
             },
             {
                 "id" : "12",
-                "url": "/images/12.jpg",
+                "url": "./images/12.jpg",
                 "alttext": "Bluebells",
                 "figcaptiontext": "I walked through this meadow of bluebells and got a good view of the snow on the mountain before the fog came in."
             }
