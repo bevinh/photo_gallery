@@ -2,6 +2,7 @@
     'use strict';
     var slides = [],
         newImages = [],
+        unique = [],
         images = [
         {
             "id" : "01",
@@ -119,11 +120,11 @@
                    
             }
                 slides.forEach(findImages) 
-                var unique = newImages.filter(function(itm, i, a) {
+                unique = newImages.filter(function(itm, i, a) {
                 return i == a.indexOf(itm);
                 });
 
-                console.log(unique);
+               return unique;
                 
     }
     
@@ -143,7 +144,12 @@
         //Iterate through the items and show any that match the cap
         $(items).each(function (index) {
             $(this).parent().show();
-            slides.push($(this).parent().attr('id'))
+             if($.inArray($(this).parent().attr('id'), slides) !== -1) {
+                   //do nothing
+                } else {
+                    slides.push($(this).parent().attr('id'))
+                }
+            
         });
 
         //Iterate through the images and find all images with the attr specified
@@ -151,40 +157,100 @@
             var alttext = $(this).attr("alt").toLowerCase();
             if (alttext === cap) {
                 $(this).parent().show();
-                slides.push($(this).parent().attr('id'))
+                if($.inArray($(this).parent().attr('id'), slides) !== -1) {
+                    //do nothing
+                } else {
+                    slides.push($(this).parent().attr('id'))
+                }
             }
         });
-        filterImages()
+
     }
      
    
      //check the input field for input, and search the alt and images to see if it's there
     $("input").keyup(function () {
+        newImages = [];
         var inputText = $('input').val();
         searchString(inputText);
     });
     
      //open the lightbox       
     function openLightbox(index){
-        //find the image that matches the index
-        var image = images.find(image => image.id === index);
+        filterImages()
+        var lightboxImages = [];
+        if ($('input').val().length == 0) {
+           lightboxImages = images;
+            console.log("I have lightboxImages that are full of images")
+        } 
+        
+        if(newImages.length > 0 && $('input').val().length > 0){
+            lightboxImages = newImages;
+            console.log("i have lightboxImages that are full of newImages")
+        }
+         console.log(lightboxImages)
+         //find the image that matches the index
+       var image = lightboxImages.find(image => image.id === index);
         //append the lightbox, with the appropriate images
          $('#photos').append(
                     '<div id="lightbox" class="lightbox">' +
                     '<span class="close cursor">&times;</span>' +
                     '<div class="lightbox-content">' +
                     '<div class="slides">' + 
-                    '<img src="' +
+                    '<img id="lightboximage" src="' +
                     image.url +
                     '" alt="' +
                     image.alttext +
                     '"style="width:100%">' +
-                    '<a class="prev" onclick="plusSlides(-1)">&#10094;</a>' +
-                    '<a class="next" onclick="plusSlides(1)">&#10095;</a>' +
+                    '<a class="prev">&#10094;</a>' +
+                    '<a class="next">&#10095;</a>' +
                     '<div class="caption-container"><p id="caption">' +
                     image.figcaptiontext +
                     '</p></div></div>'
             );
+        if (lightboxImages.indexOf(image) === 0) {
+            $('.prev').hide();
+        }
+        if (lightboxImages.indexOf(image) === lightboxImages.length - 1) {
+            $('.next').hide();
+        }
+        
+        var slideno = lightboxImages.indexOf(image);
+        
+        $('.next').on("click", function(){
+            slideno = slideno + 1;
+            $('#lightboximage').attr("src", lightboxImages[slideno].url)
+            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext)
+            $('#caption').text(lightboxImages[slideno].figcaptiontext)
+            if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
+            $('.prev').show();
+            }
+            if (lightboxImages.indexOf(lightboxImages[slideno]) === 0) {
+                 $('.prev').hide();
+            }
+             if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
+            $('.next').hide();
+            }
+        })
+        $('.prev').on("click", function(){
+            slideno = slideno - 1;
+            $('#lightboximage').attr("src", lightboxImages[slideno].url)
+            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext)
+            $('#caption').text(lightboxImages[slideno].figcaptiontext)
+            if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
+            $('.prev').show();
+            }
+            if (lightboxImages.indexOf(lightboxImages[slideno]) === 0) {
+                 $('.prev').hide();
+                 
+            }
+            if(lightboxImages.indexOf(lightboxImages[slideno]) === 0 && lightboxImages.indexOf(lightboxImages[slideno]) !== lightboxImages.length - 1){
+                $('.next').show();
+            }
+             if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
+            $('.next').hide();
+            }
+        })
         //close action to remove the lightbox once it is opened
         $('.close').on("click", function(){
          $("#lightbox").remove();
