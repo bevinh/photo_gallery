@@ -55,8 +55,13 @@ img {
   background-color: black;
   padding: 2px 16px;
   color: white;
+  margin-top: -10px;
 }
-
+#caption {
+    max-width: 600px;
+    margin: 0px auto;
+    padding: 15px;
+}
 .close {
   color: white;
   position: absolute;

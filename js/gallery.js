@@ -20,7 +20,7 @@
                 "id" : "03",
                 "url": "./images/03.jpg",
                 "alttext": "Canyon",
-                "figcaptiontext": "I hided to the top of the mountain and got this picture of the canyon and trees below."
+                "figcaptiontext": "I hiked to the top of the mountain and got this picture of the canyon and trees below."
             },
             {
                 "id" : "04",
@@ -145,12 +145,9 @@
         //Iterate through the items and show any that match the cap
         $(items).each(function (index) {
             $(this).parent().show();
-             if($.inArray($(this).parent().attr('id'), slides) !== -1) {
-                   //do nothing
-                } else {
-                    slides.push($(this).parent().attr('id'));
-                }
-            
+             if($.inArray($(this).parent().attr('id'), slides) == -1) {
+                  slides.push($(this).parent().attr('id'));
+                } 
         });
 
         //Iterate through the images and find all images with the attr specified
@@ -158,11 +155,9 @@
             var alttext = $(this).attr("alt").toLowerCase();
             if (alttext === cap) {
                 $(this).parent().show();
-                if($.inArray($(this).parent().attr('id'), slides) !== -1) {
-                    //do nothing
-                } else {
-                    slides.push($(this).parent().attr('id'));
-                }
+                if($.inArray($(this).parent().attr('id'), slides) == -1) {
+                   slides.push($(this).parent().attr('id'));
+                } 
             }
         });
 
@@ -221,49 +216,37 @@
         }
         
         var slideno = lightboxImages.indexOf(image);
-        
+          function showHideImages(slideno){
+               //set the new image's source, alttext, and caption
+                $('#lightboximage').attr("src", lightboxImages[slideno].url);
+                $('#lightboximage').attr("alt", lightboxImages[slideno].alttext);
+                $('#caption').text(lightboxImages[slideno].figcaptiontext);
+
+                //hide or show the appopriate lightbox buttons
+                if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
+                    $('.prev').show();
+                }
+                if (lightboxImages.indexOf(lightboxImages[slideno]) === 0) {
+                     $('.prev').hide();
+
+                }
+                if(lightboxImages.indexOf(lightboxImages[slideno]) === 0 && lightboxImages.indexOf(lightboxImages[slideno]) !== lightboxImages.length - 1){
+                    $('.next').show();
+                }
+                 if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
+                $('.next').hide();
+                }
+          }   
         //next button for the slider
         $('.next').on("click", function(){
             slideno = slideno + 1;
-            //set the new image's source, alttext, and caption
-            $('#lightboximage').attr("src", lightboxImages[slideno].url);
-            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext);
-            $('#caption').text(lightboxImages[slideno].figcaptiontext);
-            
-            //hide or show the appropriate lightbox buttons
-            if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
-                $('.prev').show();
-            }
-            if (lightboxImages.indexOf(lightboxImages[slideno]) === 0) {
-                 $('.prev').hide();
-            }
-             if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
-                $('.next').hide();
-            }
+            showHideImages(slideno);
         });
         
         //previous button for the slider
         $('.prev').on("click", function(){
             slideno = slideno - 1;
-            //set the new image's source, alttext, and caption
-            $('#lightboximage').attr("src", lightboxImages[slideno].url);
-            $('#lightboximage').attr("alt", lightboxImages[slideno].alttext);
-            $('#caption').text(lightboxImages[slideno].figcaptiontext);
-            
-            //hide or show the appopriate lightbox buttons
-            if (lightboxImages.indexOf(lightboxImages[slideno]) > 0) {
-                $('.prev').show();
-            }
-            if (lightboxImages.indexOf(lightboxImages[slideno]) === 0) {
-                 $('.prev').hide();
-                 
-            }
-            if(lightboxImages.indexOf(lightboxImages[slideno]) === 0 && lightboxImages.indexOf(lightboxImages[slideno]) !== lightboxImages.length - 1){
-                $('.next').show();
-            }
-             if (lightboxImages.indexOf(lightboxImages[slideno]) === lightboxImages.length - 1) {
-            $('.next').hide();
-            }
+            showHideImages(slideno);
         });
         
         //close action to remove the lightbox once it is opened
